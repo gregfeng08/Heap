@@ -16,22 +16,28 @@ int main() {
   while(running) {
     char* corf = new char[10]; //Console or file
     char arr[100];
+    char file;
     //  Heap heap = Heap();
     
     cout << "Enter from File or Console? (F/C)" << endl;
-    cin >> corf;
+    cin.getline(corf, sizeof(corf));
     cin.clear();
     cin.ignore(999,'\n');
     if (strcmp(corf, "F") == 0) {
-      ifstream file; //fix
-      file.open("test.txt");
-      while(!file.eof()){
-	file.getline(arr, sizeof(file));
+      cout<<"Input the file name"<<endl;
+      char file[100];
+      cin.getline(file, sizeof(file));
+      ifstream fileStream;
+      fileStream.open(file);
+      if(fileStream){
+	fileStream.getline(input, sizeof(input));
+      }
+      else{
+	cout<<"File does not exist"<<endl;
       }
       
     }
     else if (strcmp(corf, "C") == 0) {
-      char numberset[100];
       cout << "Please enter the number set separated by spaces:" << endl;
       cin.get(arr, 100);
       cin.clear();
@@ -74,13 +80,13 @@ void heapify(int arr[], int n, int i) //Heapify formula obtained from GeeksforGe
     } 
 }
 
-void bottomUp(int arr[], int length) { //Supposed to heapify the tree from bottom up
+/*void bottomUp(int arr[], int length) { //Supposed to heapify the tree from bottom up
   int parent = length/2;
   if (arr[length]>arr[parent] && length > 0) {
     swap(arr[length], arr[parent]);
     bottomUp(arr[], parent);
   }
-}
+  }*/
 
 void heapSort(int arr[], int length) {
   
